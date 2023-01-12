@@ -4,7 +4,7 @@ export default function Home({categorys}) {
   console.log(categorys)
   return (
     <>
-      <h1 className="text-3xl text-red-500">{categorys.name}</h1>
+      <h1 className="text-3xl text-red-500">Olá mundo</h1>
     </>
   );
 }
