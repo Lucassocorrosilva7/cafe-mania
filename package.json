@@ -10,10 +10,21 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "@prisma/client": "^4.8.1",
     "eslint": "8.31.0",
     "eslint-config-next": "13.1.1",
     "next": "13.1.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "ts-node": "^10.9.1"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "postcss": "^8.4.21",
+    "prisma": "^4.8.1",
+    "tailwindcss": "^3.2.4"
   }
 }
