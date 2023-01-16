@@ -1,13 +1,42 @@
 import { useState, useEffect, createContext } from "react";
+import axios from "axios";
 
 const CoffeeContext = createContext();
 
-
-
 const CoffeeProvider = ({ children }) => {
-const [coffe, setCoffe] = useState('');
+  const [categorys, setCategorys] = useState([]);
+  const [currentCategorys, setCurrentCategorys] = useState({});
 
-  return <CoffeeContext.Provider value={{}}>{children}</CoffeeContext.Provider>;
+  const obterCategory = async () => {
+    try {
+      const { data } = await axios("/api/category");
+      setCategorys(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    obterCategory();
+  }, []);
+
+  const handleClickcategory = (id) => {
+    const category = categorys.filter(cat => cat.id === id)
+    setCurrentCategorys(category[0])
+  }
+
+
+  return (
+    <CoffeeContext.Provider
+      value={{
+        categorys,
+        currentCategorys,
+        handleClickcategory
+      }}
+    >
+      {children}
+    </CoffeeContext.Provider>
+  );
 };
 
 export { CoffeeProvider };
