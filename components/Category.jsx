@@ -2,13 +2,13 @@ import Image from "next/image";
 import useCoffee from "../hooks/useCoffe";
 
 const Category = ({ category }) => {
-  const { currentCategorys, handleClickcategory } = useCoffee();
+  const { currentCategory, handleClickcategory } = useCoffee();
   const { name, icon, id } = category;
 
   return (
     <div
       className={`${
-        currentCategorys?.id === id ? "bg-amber-400" : ""
+        currentCategory?.id === id ? "bg-amber-400" : ""
       } flex items-center gap-4 w-full border p-5 hover:bg-amber-400`}
     >
       <Image
