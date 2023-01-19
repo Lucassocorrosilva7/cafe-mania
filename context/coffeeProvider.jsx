@@ -5,33 +5,47 @@ const CoffeeContext = createContext();
 
 const CoffeeProvider = ({ children }) => {
   const [categorys, setCategorys] = useState([]);
-  const [currentCategorys, setCurrentCategorys] = useState({});
+  const [currentCategory, setCurrentCategory] = useState({});
+  const [product, setProduct] = useState({});
+  const [modal, setModal] = useState(false);
 
-  const obterCategory = async () => {
-    try {
+  const obterCategorys = async () => {
       const { data } = await axios("/api/category");
       setCategorys(data);
-    } catch (error) {
-      console.log(error);
     }
-  };
 
   useEffect(() => {
-    obterCategory();
+    obterCategorys();
   }, []);
 
+  useEffect(() => {
+    setCurrentCategory(categorys[0]);
+  }, [categorys]);
+
   const handleClickcategory = (id) => {
-    const category = categorys.filter(cat => cat.id === id)
-    setCurrentCategorys(category[0])
+    const category = categorys.filter((cat) => cat.id === id);
+    setCurrentCategory(category[0]);
+  };
+
+
+  const handleSetProduct = (product) => {
+    setProduct(product)
   }
 
+  const handleChangeModal = () => {
+    setModal(!modal);
+  }
 
   return (
     <CoffeeContext.Provider
       value={{
         categorys,
-        currentCategorys,
-        handleClickcategory
+        currentCategory,
+        handleClickcategory,
+        product,
+        handleSetProduct,
+        modal,
+        handleChangeModal
       }}
     >
       {children}
