@@ -5,20 +5,19 @@ import useCoffee from "../hooks/useCoffe";
 const Product = ({ product }) => {
   const { handleSetProduct, handleChangeModal } = useCoffee();
 
-  const { name, price, image } = product;
 
   return (
     <div className="border p-3">
       <Image
         width={400}
         height={500}
-        src={`/assets/images/${image}.jpg`}
-        alt={name}
+        src={`/assets/images/${product?.image}.jpg`}
+        alt={product?.name}
       />
       <div className="p-5">
-        <h3 className="text-2xl font-bold">{name}</h3>
+        <h3 className="text-2xl font-bold">{product?.name}</h3>
         <p className="mt-5 font-black text-4xl text-amber-500">
-          {formatPrice(price)}
+          {formatPrice(product?.price)}
         </p>
         <button
           type="button"
