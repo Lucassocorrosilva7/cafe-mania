@@ -8,11 +8,12 @@ const CoffeeProvider = ({ children }) => {
   const [currentCategory, setCurrentCategory] = useState({});
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
+  const [order, setOrder] = useState([]);
 
   const obterCategorys = async () => {
-      const { data } = await axios("/api/category");
-      setCategorys(data);
-    }
+    const { data } = await axios("/api/category");
+    setCategorys(data);
+  };
 
   useEffect(() => {
     obterCategorys();
@@ -27,14 +28,17 @@ const CoffeeProvider = ({ children }) => {
     setCurrentCategory(category[0]);
   };
 
-
   const handleSetProduct = (product) => {
-    setProduct(product)
-  }
+    setProduct(product);
+  };
 
   const handleChangeModal = () => {
     setModal(!modal);
-  }
+  };
+
+  const handleAddOrder = ({categoryId, image, ...product}) => {
+    setOrder([...order, product])
+  };
 
   return (
     <CoffeeContext.Provider
@@ -45,7 +49,8 @@ const CoffeeProvider = ({ children }) => {
         product,
         handleSetProduct,
         modal,
-        handleChangeModal
+        handleChangeModal,
+        handleAddOrder,
       }}
     >
       {children}
